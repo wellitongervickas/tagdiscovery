@@ -7,7 +7,9 @@ const GoodReadsRating: FC<Pick<Books.Book, 'isbn'>> = ({ isbn }) => {
   const handleRequestRating = useCallback(
     async () =>
       await Services.GoodReads.getByIsbnCode(isbn)
-        .then(({ reviews_widget }) => setReviewsWidget(reviews_widget))
+        .then(({ reviews_widget }) => {
+          setReviewsWidget(reviews_widget || 'Nenhuma avaliação encontrada!')
+        })
         .catch(() => setReviewsWidget('Nenhuma avaliação encontrada!')),
     [setReviewsWidget, isbn]
   )
@@ -35,24 +37,24 @@ const GoodReadsRating: FC<Pick<Books.Book, 'isbn'>> = ({ isbn }) => {
       </Summary>
       <style jsx global>
         {`
-          #goodreads-widget,
-          #goodreads-widget iframe {
-            @apply w-full !important;
-            @apply rounded-lg p-4;
-          }
+          #goodreads-widget {
+            &,
+            iframe {
+              @apply w-full !important;
+              @apply rounded-lg p-4;
+            }
 
-          #goodreads-widget iframe {
-            @apply bg-gray-900 bg-opacity-25;
-          }
+            iframe {
+              @apply bg-gray-900 bg-opacity-25;
+            }
 
-          #goodreads-widget,
-          #goodreads-widget h1,
-          #gr_footer {
-            @apply border-none !important;
-          }
-
-          #goodreads-widget a {
-            @apply text-white !important;
+            h1,
+            #gr_footer {
+              @apply border-none !important;
+            }
+            a {
+              @apply text-white !important;
+            }
           }
         `}
       </style>

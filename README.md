@@ -1,4 +1,7 @@
 # Tag Discovery
+[![ci](https://github.com/wellitongervickas/tagdiscovery/actions/workflows/cy.yml/badge.svg?branch=main)](https://github.com/wellitongervickas/tagdiscovery/actions/workflows/cy.yml)
+
+[Demo](https://tagdiscovery.vercel.app/)
 
 A nextjs project with:
 

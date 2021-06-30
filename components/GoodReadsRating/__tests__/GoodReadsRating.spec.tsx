@@ -12,7 +12,6 @@ describe('Components Book Ratings', () => {
 
   it('renders good reads title', async () => {
     render(<GoodReadsRating {...book} />)
-
     expect(await screen.findByText('Good Reads')).toBeInTheDocument()
   })
 
@@ -22,7 +21,15 @@ describe('Components Book Ratings', () => {
     )
 
     render(<GoodReadsRating {...book} />)
-
     expect(await screen.findByText('iframe content')).toBeInTheDocument()
+  })
+
+  it('renders empty message good reads reviews', async () => {
+    fetchMock.mockRejectOnce()
+
+    render(<GoodReadsRating {...book} />)
+    expect(
+      await screen.findByText('Nenhuma avaliação encontrada!')
+    ).toBeInTheDocument()
   })
 })

@@ -8,10 +8,6 @@ const goodReads = async (
     query: { id },
   } = req
 
-  req.headers['Access-Control-Allow-Origi'] = '*'
-  req.headers['Access-Control-Allow-Headers'] =
-    'Origin, X-Requested-With, Content-Type, Accept'
-
   await fetch(
     `https://www.goodreads.com/book/isbn/${id}?format=json&key=${process.env.GOODREADS_API_KEY}`
   )
