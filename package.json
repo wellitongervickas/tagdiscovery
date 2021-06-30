@@ -1,0 +1,50 @@
+{
+  "name": "tagdiscovery",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=development next dev",
+    "build": "next build",
+    "start": "next start",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext ts --ext tsx --ext js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:e2e": "cypress run"
+  },
+  "dependencies": {
+    "next": "11.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@testing-library/cypress": "^7.0.6",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@types/jest": "^26.0.23",
+    "@types/react": "17.0.11",
+    "@types/testing-library__jest-dom": "^5.14.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "autoprefixer": "^10.2.6",
+    "babel-jest": "^27.0.5",
+    "cypress": "^7.6.0",
+    "eslint": "^7.29.0",
+    "eslint-config-next": "11.0.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-react": "^7.24.0",
+    "jest": "^27.0.5",
+    "jest-fetch-mock": "^3.0.3",
+    "node-sass": "^6.0.1",
+    "postcss": "^8.3.5",
+    "prettier": "^2.3.2",
+    "styled-jsx-plugin-postcss": "^4.0.1",
+    "styled-jsx-plugin-sass": "^1.0.0",
+    "tailwindcss": "^2.2.4",
+    "ts-jest": "^27.0.3",
+    "typescript": "4.3.4"
+  }
+}
