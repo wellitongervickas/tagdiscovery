@@ -1,4 +1,4 @@
-declare module Books {
+declare namespace Books {
   type List = Books.Book[]
   interface Book {
     objectId: string
