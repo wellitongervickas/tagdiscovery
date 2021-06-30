@@ -4,13 +4,15 @@ import Services from '@/services'
 
 const GoodReadsRating: FC<Pick<Books.Book, 'isbn'>> = ({ isbn }) => {
   const [reviewsWidget, setReviewsWidget] = useState('')
+  const fallbackMessage = 'Nenhuma avaliação encontrada!'
+
   const handleRequestRating = useCallback(
     async () =>
       await Services.GoodReads.getByIsbnCode(isbn)
         .then(({ reviews_widget }) => {
-          setReviewsWidget(reviews_widget || 'Nenhuma avaliação encontrada!')
+          setReviewsWidget(reviews_widget || fallbackMessage)
         })
-        .catch(() => setReviewsWidget('Nenhuma avaliação encontrada!')),
+        .catch(() => setReviewsWidget(fallbackMessage)),
     [setReviewsWidget, isbn]
   )
 
