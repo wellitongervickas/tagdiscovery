@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "isolatedModules": true,
     "importHelpers": true,
     "removeComments": true,
     "target": "ES6",
@@ -19,7 +20,6 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "isolatedModules": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
