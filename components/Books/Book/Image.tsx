@@ -15,7 +15,6 @@ const BookImage: FC<BookImage> = ({ priority = false, cover, name }) => (
         height="480"
         aria-label={name}
         role="img"
-        layout="responsive"
         blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkyAAAAG4AakFoPtQAAAAASUVORK5CYII="
         placeholder="blur"
         priority={priority}

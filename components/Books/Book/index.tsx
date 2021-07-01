@@ -26,8 +26,8 @@ const Book: FC<Book> = ({ book }) => (
           }
 
           &__content {
-            @apply w-64 md:w-96;
-            @apply pt-4 pb-4 md:pt-0 md:pl-4;
+            @apply w-full md:w-96;
+            @apply p-4 md:pt-0 md:pl-4;
           }
         }
       `}
