@@ -43,20 +43,20 @@ const GoodReadsRating: FC<Pick<Books.Book, 'isbn'>> = ({ isbn }) => {
             @apply min-h-full block;
             @apply bg-gray-900 bg-opacity-25;
             @apply rounded-lg p-4 py-0 mt-2 mb-16;
+          }
 
-            #goodreads-widget {
-              &,
-              iframe {
-                @apply w-full !important;
-              }
+          #goodreads-widget {
+            &,
+            iframe {
+              @apply w-full !important;
+            }
 
-              h1,
-              #gr_footer {
-                @apply border-none !important;
-              }
-              a {
-                @apply text-white !important;
-              }
+            h1,
+            #gr_footer {
+              @apply border-none !important;
+            }
+            a {
+              @apply text-white !important;
             }
           }
         `}
