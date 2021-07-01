@@ -3,8 +3,10 @@ import { Summary } from '@/components/Details'
 import Services from '@/services'
 
 const GoodReadsRating: FC<Pick<Books.Book, 'isbn'>> = ({ isbn }) => {
-  const [reviewsWidget, setReviewsWidget] = useState('')
   const fallbackMessage = 'Nenhuma avaliação encontrada!'
+  const [reviewsWidget, setReviewsWidget] = useState(
+    'Buscando avaliações no goodreads.com'
+  )
 
   const handleRequestRating = useCallback(
     async () =>
@@ -12,13 +14,11 @@ const GoodReadsRating: FC<Pick<Books.Book, 'isbn'>> = ({ isbn }) => {
         .then(({ reviews_widget }) => {
           setReviewsWidget(reviews_widget || fallbackMessage)
         })
-        .catch(() => setReviewsWidget(fallbackMessage)),
-    [setReviewsWidget, isbn]
+        .catch(() => {
+          setReviewsWidget(fallbackMessage)
+        }),
+    [isbn, setReviewsWidget]
   )
-
-  useEffect(() => {
-    setReviewsWidget('Buscando avaliações no goodreads.com')
-  }, [])
 
   useEffect(() => {
     handleRequestRating()
