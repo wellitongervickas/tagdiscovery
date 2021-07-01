@@ -26,7 +26,7 @@ describe('Components Books List', () => {
     expect(list.length).toBe(2)
   })
 
-  it('renders book link', () => {
+  it('renders books links', () => {
     render(<Books books={books} />)
 
     const [book_0, book_1] = screen.getAllByRole('link')

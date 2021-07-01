@@ -11,12 +11,12 @@ describe('Components Book Heading', () => {
     render(<Heading {...book} />)
   })
 
-  it('renders name', () => {
+  it('renders book name', () => {
     const heading = screen.getByText('Book name')
     expect(heading).toBeInTheDocument()
   })
 
-  it('renders author', () => {
+  it('renders book author', () => {
     const heading = screen.getByText('Book author')
     expect(heading).toBeInTheDocument()
   })

@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react'
 import Header from '../Header'
 
 describe('Components Header', () => {
-  it('renders banner element', () => {
+  it('renders banner (logo) element', () => {
     render(<Header />)
     expect(screen.getByRole('banner')).toBeInTheDocument()
   })

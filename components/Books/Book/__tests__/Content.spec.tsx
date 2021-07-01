@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import { render, screen } from '@testing-library/react'
 import Content from '@/components/Books/Book/Content'
 
