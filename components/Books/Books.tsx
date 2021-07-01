@@ -24,7 +24,7 @@ const Books: FC<Books> = ({ books }) => (
           @apply flex flex-wrap justify-around;
 
           &__item {
-            @apply w-60 p-4 m-0 hover:opacity-50;
+            @apply w-60 p-4 pt-0 m-0 hover:opacity-50;
             @apply transition delay-150 duration-300 ease-in-out;
           }
         }

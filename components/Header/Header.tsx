@@ -13,7 +13,7 @@ const Header: FC = () => (
     </header>
     <style jsx>{`
       .header {
-        @apply container h-24 md:h-60;
+        @apply container h-20;
         @apply m-auto px-4;
         @apply flex items-center justify-center;
 
