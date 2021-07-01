@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent, act } from '@testing-library/react'
 import Books from '@/components/Books'
 
 describe('Components Books List', () => {
@@ -19,19 +19,39 @@ describe('Components Books List', () => {
     },
   ] as Books.List
 
-  it('renders every book from list', () => {
+  beforeEach(() => {
     render(<Books books={books} />)
+  })
 
+  it('renders every book from list', () => {
     const list = screen.getAllByRole('listitem')
     expect(list.length).toBe(2)
   })
 
   it('renders books links', () => {
-    render(<Books books={books} />)
-
     const [book_0, book_1] = screen.getAllByRole('link')
 
     expect(book_0.getAttribute('href')).toBe(`/${books[0].objectId}`)
     expect(book_1.getAttribute('href')).toBe(`/${books[1].objectId}`)
+  })
+
+  it('call scrollBy event on mouse wheel down in the books list element', async () => {
+    await act(async () => {
+      const list = await screen.findByRole('list')
+      list.scrollBy = jest.fn()
+      fireEvent.wheel(list)
+
+      expect(list.scrollBy).toBeCalledWith(-350, 0)
+    })
+  })
+
+  it('call scrollBy event on mouse wheel up in the books list element', async () => {
+    await act(async () => {
+      const list = await screen.findByRole('list')
+      list.scrollBy = jest.fn()
+      fireEvent.wheel(list, { deltaY: 200 })
+
+      expect(list.scrollBy).toBeCalledWith(350, 0)
+    })
   })
 })
