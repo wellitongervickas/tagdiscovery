@@ -1,7 +1,7 @@
 import orderBooksByDate from '@/controllers/helpers/orderBooksByDate'
 
 describe('Helpers orderBooksByDate', () => {
-  it('returns all ordened books', async () => {
+  it('returns all ordened books', () => {
     const ordenedBooks = orderBooksByDate([
       { objectId: '12', edition: 'Janeiro de 2016' },
       { objectId: '5', edition: 'Junho de 2017' },

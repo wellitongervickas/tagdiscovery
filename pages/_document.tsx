@@ -13,7 +13,7 @@ class _Document extends Document<DocumentInitialProps> {
     return initialProps
   }
 
-  render() {
+  render(): JSX.Element {
     return (
       <Html lang="pt-br">
         <Head />

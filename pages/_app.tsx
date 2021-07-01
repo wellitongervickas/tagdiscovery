@@ -3,7 +3,7 @@ import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import Header from '@/components/Header'
 
-const _App = ({ Component, pageProps }: AppProps) => (
+const _App = ({ Component, pageProps }: AppProps): JSX.Element => (
   <>
     <Head>
       <title>Tag Discovery</title>
@@ -24,26 +24,26 @@ const _App = ({ Component, pageProps }: AppProps) => (
         body,
         #__next {
           @apply h-screen;
-        }
 
-        body {
-          @apply font-roboto;
-          @apply bg-fixed	bg-gradient-to-tr from-purple-900 to-yellow-900;
-          @apply text-lg;
-          @apply overflow-hidden;
-        }
+          body {
+            @apply font-roboto;
+            @apply bg-fixed	bg-gradient-to-tr from-purple-900 to-yellow-900;
+            @apply text-lg;
+            @apply overflow-hidden;
+          }
 
-        .app {
-          @apply flex flex-col;
-        }
+          .app {
+            @apply flex flex-col;
 
-        .app,
-        main {
-          @apply h-full;
-        }
+            &,
+            main {
+              @apply h-full;
+            }
 
-        main {
-          @apply flex-1;
+            main {
+              @apply flex-1;
+            }
+          }
         }
       `}
     </style>
