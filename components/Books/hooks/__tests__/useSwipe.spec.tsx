@@ -36,8 +36,8 @@ describe('Hooks useSwipe', () => {
     current.ref.current.scrollBy = jest.fn()
 
     await act(async () => {
-      current.handleOnTouchStart({ changedTouches: [{ clientX: 300 }] })
-      current.handleOnTouchMove({ changedTouches: [{ clientX: 0 }] })
+      current.handleOnTouchStart({ changedTouches: [{ clientX: 300 }] } as any)
+      current.handleOnTouchMove({ changedTouches: [{ clientX: 0 }] } as any)
       current.handleTouchEnd()
     })
 
@@ -60,8 +60,8 @@ describe('Hooks useSwipe', () => {
     current.ref.current.scrollBy = jest.fn()
 
     await act(async () => {
-      current.handleOnTouchStart({ changedTouches: [{ clientX: 300 }] })
-      current.handleOnTouchMove({ changedTouches: [{ clientX: 0 }] })
+      current.handleOnTouchStart({ changedTouches: [{ clientX: 300 }] } as any)
+      current.handleOnTouchMove({ changedTouches: [{ clientX: 0 }] } as any)
       current.handleTouchEnd()
     })
 
@@ -84,8 +84,8 @@ describe('Hooks useSwipe', () => {
     current.ref.current.scrollBy = jest.fn()
 
     await act(async () => {
-      current.handleOnTouchStart({ changedTouches: [{ clientX: 0 }] })
-      current.handleOnTouchMove({ changedTouches: [{ clientX: 300 }] })
+      current.handleOnTouchStart({ changedTouches: [{ clientX: 0 }] } as any)
+      current.handleOnTouchMove({ changedTouches: [{ clientX: 300 }] } as any)
       current.handleTouchEnd()
     })
 

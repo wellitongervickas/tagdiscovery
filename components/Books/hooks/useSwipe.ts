@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { TouchEvent, useRef, useState } from 'react'
 
 type Options = {
   swipeRange?: number
@@ -7,7 +7,7 @@ type Options = {
 type ListWheelEvent = Pick<WheelEvent, 'deltaY'>
 
 const useSwipe = (options: Options = {}) => {
-  const ref = useRef<any>(null)
+  const ref = useRef<any>()
 
   const { swipeRange = 350 } = options
   const scrollToRightValue = swipeRange
@@ -16,19 +16,20 @@ const useSwipe = (options: Options = {}) => {
   const [touchStartPosition, setTouchStartPosition] = useState(0)
   const [touchLastMovePosition, setTouchLastMovePosition] = useState(0)
 
-  const handleOnTouchStart = (event: any) => {
+  const handleOnTouchStart = (event: TouchEvent): void => {
     const clientX = getFirstToucheClientX(event)
     setTouchStartPosition(clientX)
   }
 
-  const handleOnTouchMove = (event: any) => {
+  const handleOnTouchMove = (event: TouchEvent): void => {
     const clientX = getFirstToucheClientX(event)
     setTouchLastMovePosition(clientX)
   }
 
-  const getFirstToucheClientX = (event: any) => event.changedTouches[0].clientX
+  const getFirstToucheClientX = (event: TouchEvent) =>
+    event.changedTouches[0].clientX
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (): void => {
     if (touchStartPosition >= touchLastMovePosition) {
       swipeToPosition(scrollToRightValue)
     }
@@ -41,7 +42,8 @@ const useSwipe = (options: Options = {}) => {
     setTouchLastMovePosition(0)
   }
 
-  const swipeToPosition = (value: number) => ref.current?.scrollBy(value, 0)
+  const swipeToPosition = (value: number): void =>
+    ref.current?.scrollBy(value, 0)
 
   const handleOnWheel = (event: ListWheelEvent): void => {
     ref.current?.scrollBy(
