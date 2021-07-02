@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import useSwipe from '@/components/Books/hooks/useSwipe'
 
 describe('Hooks useSwipe', () => {
-  it('swipes on mouse wheel with default range', async () => {
+  it('swipes on mouse wheel with default range', () => {
     const {
       result: { current },
     } = renderHook(() => useSwipe())
@@ -15,14 +15,14 @@ describe('Hooks useSwipe', () => {
 
     current.ref.current.scrollBy = jest.fn()
 
-    await act(async () => {
+    act(() => {
       current.handleOnWheel({ deltaY: 53 })
     })
 
     expect(current.ref.current.scrollBy).toHaveBeenCalledWith(350, 0)
   })
 
-  it('swipes with default range', async () => {
+  it('swipes with default range', () => {
     const {
       result: { current },
     } = renderHook(() => useSwipe())
@@ -35,7 +35,7 @@ describe('Hooks useSwipe', () => {
 
     current.ref.current.scrollBy = jest.fn()
 
-    await act(async () => {
+    act(() => {
       current.handleOnTouchStart({ changedTouches: [{ clientX: 300 }] } as any)
       current.handleOnTouchMove({ changedTouches: [{ clientX: 0 }] } as any)
       current.handleTouchEnd()
@@ -44,7 +44,7 @@ describe('Hooks useSwipe', () => {
     expect(current.ref.current.scrollBy).toHaveBeenCalledWith(350, 0)
   })
 
-  it('swipes to right', async () => {
+  it('swipes to right', () => {
     const swipeRange = 200
 
     const {
@@ -59,7 +59,7 @@ describe('Hooks useSwipe', () => {
 
     current.ref.current.scrollBy = jest.fn()
 
-    await act(async () => {
+    act(() => {
       current.handleOnTouchStart({ changedTouches: [{ clientX: 300 }] } as any)
       current.handleOnTouchMove({ changedTouches: [{ clientX: 0 }] } as any)
       current.handleTouchEnd()
@@ -68,7 +68,7 @@ describe('Hooks useSwipe', () => {
     expect(current.ref.current.scrollBy).toHaveBeenCalledWith(swipeRange, 0)
   })
 
-  it('swipes to left', async () => {
+  it('swipes to left', () => {
     const swipeRange = 200
 
     const {
@@ -83,7 +83,7 @@ describe('Hooks useSwipe', () => {
 
     current.ref.current.scrollBy = jest.fn()
 
-    await act(async () => {
+    act(() => {
       current.handleOnTouchStart({ changedTouches: [{ clientX: 0 }] } as any)
       current.handleOnTouchMove({ changedTouches: [{ clientX: 300 }] } as any)
       current.handleTouchEnd()

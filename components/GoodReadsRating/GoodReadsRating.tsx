@@ -9,8 +9,8 @@ const GoodReadsRating: FC<Pick<Books.Book, 'isbn'>> = ({ isbn }) => {
   )
 
   const handleRequestRating = useCallback(
-    async () =>
-      await Services.GoodReads.getByIsbnCode(isbn)
+    () =>
+      Services.GoodReads.getByIsbnCode(isbn)
         .then(({ reviews_widget }) => {
           setReviewsWidget(reviews_widget || fallbackMessage)
         })

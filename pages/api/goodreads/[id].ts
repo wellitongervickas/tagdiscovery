@@ -1,14 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const goodReads = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<any> => {
+const goodReads = (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { id },
   } = req
 
-  await fetch(
+  fetch(
     `https://www.goodreads.com/book/isbn/${id}?format=json&key=${process.env.GOODREADS_API_KEY}`
   )
     .then((res) => res.json())

@@ -1,10 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Controllers from '@/controllers'
 
-const book = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-): Promise<any> => {
+const book = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { id },
   } = req
