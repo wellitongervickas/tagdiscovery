@@ -17,15 +17,15 @@ const months = [
 
 const orderBooksByDate = (books: Books.List): Books.List => {
   const ordenedListOfBooks = books.sort((firstBook, secondBook) => {
-    const [firstMonth, , firstYear] = firstBook.edition.split(' ')
-    const [secondMonth, , secondYear] = secondBook.edition.split(' ')
+    const [firstMonth, firstYear] = getDateFromEdition(firstBook.edition)
+    const [secondMonth, secondYear] = getDateFromEdition(secondBook.edition)
 
     const years = orderBy.asc(firstYear, secondYear)
     const yearsAreEquals = years === 0
 
     if (yearsAreEquals) {
-      const firstMonthOrder = months.indexOf(firstMonth)
-      const secondMonthOrder = months.indexOf(secondMonth)
+      const firstMonthOrder = getMonthPosition(firstMonth)
+      const secondMonthOrder = getMonthPosition(secondMonth)
 
       return orderBy.dsc(firstMonthOrder, secondMonthOrder)
     }
@@ -35,5 +35,12 @@ const orderBooksByDate = (books: Books.List): Books.List => {
 
   return ordenedListOfBooks
 }
+
+const getDateFromEdition = (edition: string) => {
+  const [month, , year] = edition.split(' ')
+  return [month, year]
+}
+
+const getMonthPosition = (month: string) => months.indexOf(month)
 
 export default orderBooksByDate
