@@ -9,7 +9,7 @@ type Books = { books: Books.List }
 const Books: FC<Books> = ({ books }) => {
   const swipeRange = 350
   const {
-    ref,
+    ref: listRefElement,
     handleOnWheel,
     handleOnTouchStart,
     handleOnTouchMove,
@@ -19,7 +19,7 @@ const Books: FC<Books> = ({ books }) => {
   return (
     <>
       <dl
-        ref={ref}
+        ref={listRefElement}
         className="books"
         role="list"
         onWheel={handleOnWheel}

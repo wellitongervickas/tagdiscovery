@@ -11,17 +11,19 @@ const Header: FC = () => (
         </a>
       </Link>
     </header>
-    <style jsx>{`
-      .header {
-        @apply container h-20;
-        @apply m-auto px-4;
-        @apply flex items-center justify-center;
+    <style jsx>
+      {`
+        .header {
+          @apply container h-20;
+          @apply m-auto px-4;
+          @apply flex items-center justify-center;
 
-        &__logo {
-          @apply w-48 opacity-80;
+          &__logo {
+            @apply w-48 opacity-80;
+          }
         }
-      }
-    `}</style>
+      `}
+    </style>
   </>
 )
 

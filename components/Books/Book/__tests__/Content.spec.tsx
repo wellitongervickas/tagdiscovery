@@ -16,10 +16,8 @@ jest.mock('@/components/Books/Book/Ratings', () => () => (
 ))
 
 describe('Components Book Content', () => {
-  const book = {}
-
   beforeEach(() => {
-    render(<Content book={book as any} />)
+    render(<Content book={{} as any} />)
   })
 
   it('renders content heading', () => {

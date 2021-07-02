@@ -13,33 +13,36 @@ const useSwipe = (options: Options = {}) => {
   const scrollToRightValue = swipeRange
   const scrollToLeftValue = -scrollToRightValue
 
-  const [touchStartPosition, setTouchStartPosition] = useState(0)
-  const [touchLastMovePosition, setTouchLastMovePosition] = useState(0)
+  const [touchStartPositionX, setTouchStartPositionX] = useState(0)
+  const [touchLastPositionX, setTouchEndPositionX] = useState(0)
 
   const handleOnTouchStart = (event: TouchEvent): void => {
-    const clientX = getFirstToucheClientX(event)
-    setTouchStartPosition(clientX)
+    const clientX = getFirstTouchClientX(event)
+    setTouchStartPositionX(clientX)
   }
 
   const handleOnTouchMove = (event: TouchEvent): void => {
-    const clientX = getFirstToucheClientX(event)
-    setTouchLastMovePosition(clientX)
+    const clientX = getFirstTouchClientX(event)
+    setTouchEndPositionX(clientX)
   }
 
-  const getFirstToucheClientX = (event: TouchEvent) =>
+  const getFirstTouchClientX = (event: TouchEvent) =>
     event.changedTouches[0].clientX
 
   const handleTouchEnd = (): void => {
-    if (touchStartPosition >= touchLastMovePosition) {
+    const touchMoveLeftToRight = touchStartPositionX >= touchLastPositionX
+    const touchMoveRightToLeft = touchStartPositionX <= touchLastPositionX
+
+    if (touchMoveLeftToRight) {
       swipeToPosition(scrollToRightValue)
     }
 
-    if (touchStartPosition <= touchLastMovePosition) {
+    if (touchMoveRightToLeft) {
       swipeToPosition(scrollToLeftValue)
     }
 
-    setTouchStartPosition(0)
-    setTouchLastMovePosition(0)
+    setTouchStartPositionX(0)
+    setTouchEndPositionX(0)
   }
 
   const swipeToPosition = (value: number): void =>
