@@ -10,13 +10,13 @@ const Books: FC<Books> = ({ books }) => {
   const ref = useRef<HTMLDListElement>(null)
   const scrollValue = 350
 
-  const handleWheel = (event: ListWheelEvent): void => {
+  const handleOnWheel = (event: ListWheelEvent): void => {
     ref.current?.scrollBy(event.deltaY > 0 ? scrollValue : -scrollValue, 0)
   }
 
   return (
     <>
-      <dl ref={ref} className="books" role="list" onWheel={handleWheel}>
+      <dl ref={ref} className="books" role="list" onWheel={handleOnWheel}>
         {books.map((book: Books.Book) => (
           <dd key={book.objectId} className="books__item" role="listitem">
             <Link href={getBookHref(book.objectId)} passHref>
@@ -31,7 +31,10 @@ const Books: FC<Books> = ({ books }) => {
         {`
           .books {
             @apply flex overflow-hidden;
+            scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
+            scroll-snap-align: start;
+            overflow-scrolling: touch;
 
             &__item {
               @apply flex-none;

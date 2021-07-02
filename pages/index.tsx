@@ -17,7 +17,7 @@ const Home = ({
       {`
         .books_view {
           @apply h-full;
-          @apply overflow-y-auto;
+          @apply overflow-hidden;
           @apply pt-6 pb-24;
         }
       `}
