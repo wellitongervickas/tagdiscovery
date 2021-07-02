@@ -2,35 +2,60 @@ import { FC } from 'react'
 import Link from 'next/link'
 import { BookImage } from '@/components/Books/Book'
 import { getBookHref } from '@/components/Books/helpers'
+import useSwipe from '@/components/Books/hooks/useSwipe'
 
 type Books = { books: Books.List }
 
-const Books: FC<Books> = ({ books }) => (
-  <>
-    <dl className="books" role="list">
-      {books.map((book: Books.Book) => (
-        <dd key={book.objectId} className="books__item" role="listitem">
-          <Link href={getBookHref(book.objectId)} passHref>
-            <a>
-              <BookImage name={book.name} cover={book.cover} />
-            </a>
-          </Link>
-        </dd>
-      ))}
-    </dl>
-    <style jsx>
-      {`
-        .books {
-          @apply flex flex-wrap justify-around;
+const Books: FC<Books> = ({ books }) => {
+  const swipeRange = 350
+  const {
+    ref,
+    handleOnWheel,
+    handleOnTouchStart,
+    handleOnTouchMove,
+    handleTouchEnd,
+  } = useSwipe({ swipeRange })
 
-          &__item {
-            @apply w-60 p-4 pt-0 m-0 hover:opacity-50;
-            @apply transition delay-150 duration-300 ease-in-out;
+  return (
+    <>
+      <dl
+        ref={ref}
+        className="books"
+        role="list"
+        onWheel={handleOnWheel}
+        onTouchStart={handleOnTouchStart}
+        onTouchMove={handleOnTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {books.map((book: Books.Book) => (
+          <dd key={book.objectId} className="books__item" role="listitem">
+            <Link href={getBookHref(book.objectId)} passHref>
+              <a>
+                <BookImage name={book.name} cover={book.cover} />
+              </a>
+            </Link>
+          </dd>
+        ))}
+      </dl>
+      <style jsx>
+        {`
+          .books {
+            @apply flex overflow-hidden;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scroll-snap-align: start;
+            overflow-scrolling: touch;
+
+            &__item {
+              @apply flex-none;
+              height: 480px;
+              width: ${swipeRange};
+            }
           }
-        }
-      `}
-    </style>
-  </>
-)
+        `}
+      </style>
+    </>
+  )
+}
 
 export default Books

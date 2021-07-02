@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import Content from '@/components/Books/Book/Content'
 
-const Component = ({ name }: { name: string }): JSX.Element => <div>{name}</div>
+const Component = ({ name }: { name: string }) => <div>{name}</div>
 
 jest.mock('@/components/Books/Book/Heading', () => () => (
   <Component name="Heading" />

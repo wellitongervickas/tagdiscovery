@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 describe('Books', () => {
   it('renders books page', () => {
     cy.visit('/')
@@ -8,5 +7,3 @@ describe('Books', () => {
     })
   })
 })
-
-export default {}

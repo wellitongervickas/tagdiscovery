@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import Books from '@/components/Books'
 
 describe('Components Books List', () => {
@@ -19,19 +19,59 @@ describe('Components Books List', () => {
     },
   ] as Books.List
 
-  it('renders every book from list', () => {
+  beforeEach(() => {
     render(<Books books={books} />)
+  })
 
+  it('renders every book from list', () => {
     const list = screen.getAllByRole('listitem')
     expect(list.length).toBe(2)
   })
 
   it('renders books links', () => {
-    render(<Books books={books} />)
-
     const [book_0, book_1] = screen.getAllByRole('link')
 
     expect(book_0.getAttribute('href')).toBe(`/${books[0].objectId}`)
     expect(book_1.getAttribute('href')).toBe(`/${books[1].objectId}`)
+  })
+
+  it('call scrollBy once on mouse wheel up event', async () => {
+    const list = await screen.findByRole('list')
+    list.scrollBy = jest.fn()
+    fireEvent.wheel(list)
+
+    expect(list.scrollBy).toBeCalledWith(-350, 0)
+  })
+
+  it('call scrollBy once on mouse wheel down event', async () => {
+    const list = await screen.findByRole('list')
+    list.scrollBy = jest.fn()
+    fireEvent.wheel(list, { deltaY: 200 })
+
+    expect(list.scrollBy).toBeCalledWith(350, 0)
+  })
+
+  describe('mobile only', () => {
+    it('call scrollBy once on mouse touch left to right event', async () => {
+      const list = await screen.findByRole('list')
+      list.scrollBy = jest.fn()
+
+      fireEvent.touchStart(list, { changedTouches: [{ clientX: 300 }] })
+      fireEvent.touchMove(list, { changedTouches: [{ clientX: 0 }] })
+      fireEvent.touchEnd(list)
+
+      expect(list.scrollBy).toBeCalledWith(350, 0)
+    })
+
+    it('call scrollBy once on mouse touch right to left event', async () => {
+      const list = await screen.findByRole('list')
+      list.scrollBy = jest.fn()
+
+      fireEvent.touchStart(list, { changedTouches: [{ clientX: 0 }] })
+      fireEvent.touchMove(list, { changedTouches: [{ clientX: 300 }] })
+      fireEvent.touchEnd(list)
+
+      expect(list.scrollBy).toBeCalledWith(-350, 0)
+    })
   })
 })

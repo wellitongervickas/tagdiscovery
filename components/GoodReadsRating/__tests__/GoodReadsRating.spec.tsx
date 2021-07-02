@@ -24,7 +24,16 @@ describe('Components Book Ratings', () => {
     expect(await screen.findByText('iframe content')).toBeInTheDocument()
   })
 
-  it('renders empty message good reads reviews', async () => {
+  it('displays fallback message on resolve with empty reviews', async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ reviews_widget: null }))
+
+    render(<GoodReadsRating {...book} />)
+    expect(
+      await screen.findByText('Nenhuma avaliação encontrada!')
+    ).toBeInTheDocument()
+  })
+
+  it('displays fallback message on reject reviews', async () => {
     fetchMock.mockRejectOnce()
 
     render(<GoodReadsRating {...book} />)
