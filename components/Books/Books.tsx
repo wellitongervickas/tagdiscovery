@@ -1,22 +1,32 @@
-import { FC, useRef } from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 import { BookImage } from '@/components/Books/Book'
 import { getBookHref } from '@/components/Books/helpers'
+import useSwipe from '@/components/Books/hooks/useSwipe'
 
 type Books = { books: Books.List }
-type ListWheelEvent = Pick<WheelEvent, 'deltaY'>
 
 const Books: FC<Books> = ({ books }) => {
-  const ref = useRef<HTMLDListElement>(null)
-  const scrollValue = 350
-
-  const handleOnWheel = (event: ListWheelEvent): void => {
-    ref.current?.scrollBy(event.deltaY > 0 ? scrollValue : -scrollValue, 0)
-  }
+  const swipeRange = 350
+  const {
+    ref,
+    handleOnWheel,
+    handleOnTouchStart,
+    handleOnTouchMove,
+    handleTouchEnd,
+  } = useSwipe({ swipeRange })
 
   return (
     <>
-      <dl ref={ref} className="books" role="list" onWheel={handleOnWheel}>
+      <dl
+        ref={ref}
+        className="books"
+        role="list"
+        onWheel={handleOnWheel}
+        onTouchStart={handleOnTouchStart}
+        onTouchMove={handleOnTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {books.map((book: Books.Book) => (
           <dd key={book.objectId} className="books__item" role="listitem">
             <Link href={getBookHref(book.objectId)} passHref>
@@ -39,7 +49,7 @@ const Books: FC<Books> = ({ books }) => {
             &__item {
               @apply flex-none;
               height: 480px;
-              width: ${scrollValue}px;
+              width: ${swipeRange};
             }
           }
         `}
